@@ -1,0 +1,23 @@
+version: '3.8' # Versão do Compose que está sendo utilizada
+
+services:
+  php: # Nome do serviço PHP
+    image: php:7.4-apache
+    container_name: meu-php
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /home/admintami/desenvolvimentos-projetos/projeto-php:/var/www/html
+    links:
+      - db
+
+  db: # Nome do serviço de banco de dados (MySQL)
+    image: mysql:latest
+    container_name: my-mysql
+    ports:
+      - "3306:3306"
+    volumes:
+      - "/var/lib/mysql"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
